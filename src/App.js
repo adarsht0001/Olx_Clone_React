@@ -1,7 +1,9 @@
 import React,{useEffect,useContext} from 'react';
 import './App.css';
 import { BrowserRouter, Routes,Route } from 'react-router-dom';
-import { AuthContext } from './context/Context';
+import { AuthContext ,FirebaseContext} from './context/Context';
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+
 /**
  * ?  =====Import Components=====
  */
@@ -10,9 +12,13 @@ import SignupPage from './Pages/Signup';
 import LoginPage from './Pages/Login'
 
 function App() {
-  const {user} =useContext(AuthContext)
+  const {user,setUser} =useContext(AuthContext)
+  const {firebase}=useContext(FirebaseContext)
+  const auth=getAuth(firebase)
   useEffect(()=>{
-    console.log(user)
+    onAuthStateChanged(auth,(user)=>{
+      setUser(user)
+    })
   })
   return (
     <div>
