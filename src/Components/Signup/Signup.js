@@ -13,10 +13,10 @@ export default function Signup() {
   const [phone,setPhone]=useState('')
   const [password,setPassword]=useState('')
   const {firebase}=useContext(FirebaseContext)
+  const auth=getAuth(firebase)
+  const db = getFirestore(firebase)
   const submitForm=(e)=>{
     e.preventDefault()
-    const auth=getAuth(firebase)
-    const db = getFirestore(firebase)
     createUserWithEmailAndPassword(auth,email,password).then((result)=>{
       updateProfile(result.user,{displayName:Username}).then(()=>{
         addDoc(collection(db,'users'),{

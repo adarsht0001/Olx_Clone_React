@@ -1,38 +1,65 @@
-import React from 'react';
-
-import Logo from '../../olx-logo.png';
-import './Login.css';
+import React, { useState, useContext } from "react";
+import { FirebaseContext } from "../../context/firebaseContext";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
+import Logo from "../../olx-logo.png";
+import "./Login.css";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
+const MySwal = withReactContent(Swal);
 
 function Login() {
+  const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const { firebase } = useContext(FirebaseContext);
+  const auth = getAuth(firebase);
+  const login = (e) => {
+    e.preventDefault();
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        navigate("/");
+      })
+      .catch((error) => {
+        MySwal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: error.message,
+        });
+      });
+  };
+
   return (
     <div>
       <div className="loginParentDiv">
-        <img width="200px" height="200px" src={Logo} alt='' ></img>
-        <form>
-          <label htmlFor="fname">Email</label>
+        <img width="200px" height="200px" src={Logo} alt=""></img>
+        <form onSubmit={login}>
+          <label htmlFor="email">Email</label>
           <br />
           <input
             className="input"
             type="email"
-            id="fname"
+            id="email"
             name="email"
-            defaultValue="John"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
           <br />
-          <label htmlFor="lname">Password</label>
+          <label htmlFor="password">Password</label>
           <br />
           <input
             className="input"
             type="password"
-            id="lname"
+            id="password"
             name="password"
-            defaultValue="Doe"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
           />
           <br />
           <br />
           <button>Login</button>
         </form>
-        <a href='/signup'>Signup</a>
+        <a href="/signup">Signup</a>
       </div>
     </div>
   );
