@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { FirebaseContext } from "../../context/firebaseContext";
+import { FirebaseContext } from "../../context/Context";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import Logo from "../../olx-logo.png";

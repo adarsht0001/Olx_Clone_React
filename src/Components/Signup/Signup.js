@@ -3,7 +3,7 @@ import { getAuth, createUserWithEmailAndPassword,updateProfile } from "firebase/
 import { getFirestore, collection ,addDoc} from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import Logo from '../../olx-logo.png';
-import {FirebaseContext}  from '../../context/firebaseContext';
+import {FirebaseContext}  from '../../context/Context';
 import './Signup.css';
 
 export default function Signup() {
