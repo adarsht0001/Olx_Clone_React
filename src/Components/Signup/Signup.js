@@ -8,11 +8,16 @@ export default function Signup() {
   const [email,setEmail]=useState('')
   const [phone,setPhone]=useState('')
   const [password,setPassword]=useState('')
+
+  const submitForm=(e)=>{
+    e.preventDefault()
+    console.log(phone);
+  }
   return (
     <div>
       <div className="signupParentDiv">
         <img width="200px" height="200px" src={Logo} alt='#'></img>
-        <form>
+        <form onSubmit={submitForm}>
           <label htmlFor="fname">Username</label>
           <br />
           <input
@@ -24,23 +29,23 @@ export default function Signup() {
             onChange={(e)=>setUsername(e.target.value)}
           />
           <br />
-          <label htmlFor="fname">Email</label>
+          <label htmlFor="email">Email</label>
           <br />
           <input
             className="input"
             type="email"
-            id="fname"
+            id="email"
             name="email"
             value={email}
             onChange={(e)=>setEmail(e.target.value)}
           />
           <br />
-          <label htmlFor="lname">Phone</label>
+          <label htmlFor="phone">Phone</label>
           <br />
           <input
             className="input"
             type="number"
-            id="lname"
+            id="phone"
             name="phone"
             value={phone}
             onChange={(e)=>setPhone(e.target.value)}
