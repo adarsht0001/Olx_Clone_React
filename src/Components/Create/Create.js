@@ -4,6 +4,7 @@ import Header from "../Header/Header";
 import { getStorage, ref, uploadBytes ,getDownloadURL} from "firebase/storage";
 import { getFirestore, collection ,addDoc} from "firebase/firestore";
 import { FirebaseContext, AuthContext } from "../../context/Context";
+import { useNavigate } from "react-router-dom";
 
 const Create = () => {
   const [name, setName] = useState("");
@@ -14,6 +15,7 @@ const Create = () => {
   const {user}=useContext(AuthContext)
   const db = getFirestore(firebase)
   const storage = getStorage(firebase);
+  const navigate =useNavigate()
   const date=new Date()
   const handleSubmit = () => {
     const storageRef = ref(storage, `/images/${image.name}`);
@@ -26,7 +28,7 @@ const Create = () => {
           url,
           userId:user.uid,
           createdAt:date.toDateString()
-        })
+        }).then(()=>navigate('/'))
       })
     })
   };

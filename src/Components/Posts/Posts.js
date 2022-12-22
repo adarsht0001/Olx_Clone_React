@@ -1,10 +1,25 @@
-import React from 'react';
-
-import Heart from '../../assets/Heart';
-import './Post.css';
+import React, { useEffect } from "react";
+import { useState, useContext } from "react";
+import { collection, getDocs, getFirestore } from "firebase/firestore";
+import Heart from "../../assets/Heart";
+import "./Post.css";
+import { FirebaseContext } from "../../context/Context";
 
 function Posts() {
-
+  const { firebase } = useContext(FirebaseContext);
+  const [product, setProduct] = useState([]);
+  const db = getFirestore(firebase);
+  useEffect(() => {
+    getDocs(collection(db, "products")).then((snapshot) => {
+      const allPost = snapshot.docs.map((product) => {
+        return {
+          ...product.data(),
+          id: product.id,
+        };
+      });
+      setProduct(allPost);
+    });
+  }, []);
   return (
     <div className="postParentDiv">
       <div className="moreView">
@@ -13,24 +28,26 @@ function Posts() {
           <span>View more</span>
         </div>
         <div className="cards">
-          <div
-            className="card"
-          >
-            <div className="favorite">
-              <Heart></Heart>
+          {product.map((element) => {
+            return(
+            <div className="card">
+              <div className="favorite">
+                <Heart></Heart>
+              </div>
+              <div className="image">
+                <img src="../../../Images/R15V3.jpg" alt="" />
+              </div>
+              <div className="content">
+                <p className="rate">&#x20B9; 250000</p>
+                <span className="kilometer">Two Wheeler</span>
+                <p className="name"> YAMAHA R15V3</p>
+              </div>
+              <div className="date">
+                <span>Tue May 04 2021</span>
+              </div>
             </div>
-            <div className="image">
-              <img src="../../../Images/R15V3.jpg" alt="" />
-            </div>
-            <div className="content">
-              <p className="rate">&#x20B9; 250000</p>
-              <span className="kilometer">Two Wheeler</span>
-              <p className="name"> YAMAHA R15V3</p>
-            </div>
-            <div className="date">
-              <span>Tue May 04 2021</span>
-            </div>
-          </div>
+            )
+          })}
         </div>
       </div>
       <div className="recommendations">
