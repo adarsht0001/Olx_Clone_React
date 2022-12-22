@@ -35,15 +35,15 @@ function Posts() {
                 <Heart></Heart>
               </div>
               <div className="image">
-                <img src="../../../Images/R15V3.jpg" alt="" />
+                <img src={element.url} alt="" />
               </div>
               <div className="content">
-                <p className="rate">&#x20B9; 250000</p>
-                <span className="kilometer">Two Wheeler</span>
-                <p className="name"> YAMAHA R15V3</p>
+                <p className="rate">&#x20B9; {element.price}</p>
+                <span className="kilometer">{element.category}</span>
+                <p className="name">{element.name}</p>
               </div>
               <div className="date">
-                <span>Tue May 04 2021</span>
+                <span>{element.createdAt}</span>
               </div>
             </div>
             )
