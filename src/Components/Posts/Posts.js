@@ -4,10 +4,14 @@ import { collection, getDocs, getFirestore } from "firebase/firestore";
 import Heart from "../../assets/Heart";
 import "./Post.css";
 import { FirebaseContext } from "../../context/Context";
+import { PostContext } from "../../context/postContext";
+import { useNavigate } from "react-router-dom";
 
 function Posts() {
   const { firebase } = useContext(FirebaseContext);
   const [product, setProduct] = useState([]);
+  const { setPostDetails } = useContext(PostContext);
+  const navigate = useNavigate();
   const db = getFirestore(firebase);
   useEffect(() => {
     getDocs(collection(db, "products")).then((snapshot) => {
@@ -28,25 +32,32 @@ function Posts() {
           <span>View more</span>
         </div>
         <div className="cards">
-          {product.map((element,i) => {
-            return(
-            <div className="card" key={i}>
-              <div className="favorite">
-                <Heart></Heart>
+          {product.map((element, i) => {
+            return (
+              <div
+                className="card"
+                key={i}
+                onClick={() => {
+                  setPostDetails(element);
+                  navigate("/view");
+                }}
+              >
+                <div className="favorite">
+                  <Heart></Heart>
+                </div>
+                <div className="image">
+                  <img src={element.url} alt="" />
+                </div>
+                <div className="content">
+                  <p className="rate">&#x20B9; {element.price}</p>
+                  <span className="kilometer">{element.category}</span>
+                  <p className="name">{element.name}</p>
+                </div>
+                <div className="date">
+                  <span>{element.createdAt}</span>
+                </div>
               </div>
-              <div className="image">
-                <img src={element.url} alt="" />
-              </div>
-              <div className="content">
-                <p className="rate">&#x20B9; {element.price}</p>
-                <span className="kilometer">{element.category}</span>
-                <p className="name">{element.name}</p>
-              </div>
-              <div className="date">
-                <span>{element.createdAt}</span>
-              </div>
-            </div>
-            )
+            );
           })}
         </div>
       </div>

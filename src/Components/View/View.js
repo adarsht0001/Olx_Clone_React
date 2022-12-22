@@ -1,7 +1,8 @@
-import React from 'react';
-
+import React,{useEffect,useState,useContext} from 'react';
+import {PostContext} from '../../context/postContext'
 import './View.css';
 function View() {
+  const {}=useContext()
   return (
     <div className="viewParentDiv">
       <div className="imageShowDiv">
