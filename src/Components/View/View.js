@@ -2,18 +2,18 @@ import React,{useEffect,useState,useContext} from 'react';
 import {PostContext} from '../../context/postContext'
 import './View.css';
 function View() {
-  const {}=useContext()
+  const {postDeatils}=useContext(PostContext)
   return (
     <div className="viewParentDiv">
       <div className="imageShowDiv">
         <img
-          src="../../../Images/R15V3.jpg"
+          src={postDeatils.url}
           alt=""
         />
       </div>
       <div className="rightSection">
         <div className="productDetails">
-          <p>&#x20B9; 250000 </p>
+          <p>&#x20B9;{postDeatils.price} </p>
           <span>YAMAHA R15V3</span>
           <p>Two Wheeler</p>
           <span>Tue May 04 2021</span>
