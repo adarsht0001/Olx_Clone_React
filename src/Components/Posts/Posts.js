@@ -28,9 +28,9 @@ function Posts() {
           <span>View more</span>
         </div>
         <div className="cards">
-          {product.map((element) => {
+          {product.map((element,i) => {
             return(
-            <div className="card">
+            <div className="card" key={i}>
               <div className="favorite">
                 <Heart></Heart>
               </div>
