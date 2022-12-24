@@ -51,13 +51,13 @@ function Header() {
             })
           }}>Logout</span>}
 
-        <div className="sellMenu">
+        <div className="sellMenu" onClick={()=>{
+              user?navigate('/create'):navigate('/login')
+            }}>
           <SellButton></SellButton>
           <div className="sellMenuContent">
             <SellButtonPlus></SellButtonPlus>
-            <span onClick={()=>{
-              user?navigate('/create'):navigate('/login')
-            }}>SELL</span>
+            <span>SELL</span>
           </div>
         </div>
       </div>
