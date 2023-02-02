@@ -18,7 +18,7 @@ const Create = () => {
   const navigate =useNavigate()
   const date=new Date()
   const handleSubmit = () => {
-    const storageRef = ref(storage, `/images/${image.name}`);
+    const storageRef = ref(storage, `/images/${image.name}`)
     uploadBytes(storageRef, image).then(({ref}) => {
       getDownloadURL(ref).then((url)=>{
         addDoc(collection(db,'products'),{

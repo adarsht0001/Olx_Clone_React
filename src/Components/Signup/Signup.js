@@ -29,6 +29,13 @@ export default function Signup() {
       })
     })
   }
+  function valid(value){
+    if(Username.length>0){
+      alert()
+    }else{
+      setUsername()
+    }
+  }
   return (
     <div>
       <div className="signupParentDiv">
@@ -42,7 +49,9 @@ export default function Signup() {
             id="fname"
             name="name"
             value={Username}
-            onChange={(e)=>setUsername(e.target.value)}
+            onChange={
+              (e)=>setUsername(e.target.value)
+            }
           />
           <br />
           <label htmlFor="email">Email</label>
